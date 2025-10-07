@@ -23,7 +23,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        Gate::authorize('create-post');
+        Gate::authorize('create', Post::class);
 
         return view('posts.create');
     }
@@ -33,14 +33,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        /*
-        // longer version of the code
-        if (! Gate::allows('create-post')) {
-            abort(403);
-        }*/
-
-        // shorter version of the code
-        Gate::authorize('create-post'); // throws 403 if the user does not have the permission
+        Gate::authorize('create', Post::class);
 
         $request->validate(['title' => 'required', 'body' => 'required']);
         $request->user()->posts()->create($request->only('title', 'body'));

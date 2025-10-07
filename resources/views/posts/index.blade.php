@@ -3,6 +3,6 @@
     <p>{{ $post->body }}</p>
 @endforeach
 
-@can('create-post')
-    <a href="{{ route('posts.create') }}">Create Post</a>
+@can('create', $post)
+'Hello'
 @endcan
